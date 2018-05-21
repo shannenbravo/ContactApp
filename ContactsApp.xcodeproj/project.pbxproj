@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D5AED91320B33BEB000131B6 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AED91220B33BEB000131B6 /* UIColor+theme.swift */; };
+		D5AED91520B3684A000131B6 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AED91420B3684A000131B6 /* Company.swift */; };
+		D5AED91720B36CD8000131B6 /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AED91620B36CD8000131B6 /* CreateCompanyController.swift */; };
 		D5EDFFD120AF861500FC22EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EDFFD020AF861500FC22EA /* AppDelegate.swift */; };
 		D5EDFFD320AF861500FC22EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EDFFD220AF861500FC22EA /* ViewController.swift */; };
 		D5EDFFD620AF861500FC22EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5EDFFD420AF861500FC22EA /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		D5AED91220B33BEB000131B6 /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
+		D5AED91420B3684A000131B6 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
+		D5AED91620B36CD8000131B6 /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
 		D5EDFFCD20AF861500FC22EA /* ContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5EDFFD020AF861500FC22EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5EDFFD220AF861500FC22EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,9 +60,11 @@
 		D5EDFFCF20AF861500FC22EA /* ContactsApp */ = {
 			isa = PBXGroup;
 			children = (
-				D5EDFFD020AF861500FC22EA /* AppDelegate.swift */,
 				D5EDFFD220AF861500FC22EA /* ViewController.swift */,
+				D5EDFFD020AF861500FC22EA /* AppDelegate.swift */,
+				D5AED91420B3684A000131B6 /* Company.swift */,
 				D5EDFFD420AF861500FC22EA /* Main.storyboard */,
+				D5AED91620B36CD8000131B6 /* CreateCompanyController.swift */,
 				D5AED91220B33BEB000131B6 /* UIColor+theme.swift */,
 				D5EDFFD720AF861700FC22EA /* Assets.xcassets */,
 				D5EDFFD920AF861700FC22EA /* LaunchScreen.storyboard */,
@@ -140,7 +146,9 @@
 			files = (
 				D5AED91320B33BEB000131B6 /* UIColor+theme.swift in Sources */,
 				D5EDFFD320AF861500FC22EA /* ViewController.swift in Sources */,
+				D5AED91720B36CD8000131B6 /* CreateCompanyController.swift in Sources */,
 				D5EDFFD120AF861500FC22EA /* AppDelegate.swift in Sources */,
+				D5AED91520B3684A000131B6 /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
