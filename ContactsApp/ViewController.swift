@@ -8,30 +8,39 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
-    
-    let companies = [
+class ViewController: UITableViewController, CreateCompanyControllerDelegate {
+
+    func didAddComany(company: Company) {
+        companies.append(company)
+        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+        
+    }
+    var companies = [
         Company(name: "SpaceX", founded: Date()),
         Company(name: "Tesla", founded: Date())
     ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Contacts"
+        view.backgroundColor = .white
+        navigationItem.title = "Companies"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "addIcon 2").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddContact))
         tableView.backgroundColor = .white
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
         tableView.tableFooterView = UIView();
     }
-    
+
 
     @objc func handleAddContact (){
         print("Adding Contact")
         let createCompanyController = CreateCompanyController();
         let navController = costumNavigateBar(rootViewController: createCompanyController)
+        createCompanyController.delegate = self
         present(navController, animated: true, completion: nil)
-        
+
     }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
         cell.backgroundColor = .pastelGrey
@@ -41,7 +50,7 @@ class ViewController: UITableViewController {
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return companies.count
     }
@@ -50,7 +59,7 @@ class ViewController: UITableViewController {
         view.backgroundColor = .lightGray
         return view
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
@@ -58,4 +67,11 @@ class ViewController: UITableViewController {
 
 
 }
+
+
+
+
+
+
+
 
