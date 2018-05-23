@@ -18,10 +18,7 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
         
     }
     var companies = [Company]()
-//    var companies = [
-//        Company(name: "SpaceX", founded: Date()),
-//        Company(name: "Tesla", founded: Date())
-//    ]'
+
     
     private func fetchCompanies(){
         let persistantcontainer = NSPersistentContainer(name: "IntermediateTraningModels")
@@ -45,6 +42,9 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
             companies.forEach({ (company) in
                 print(company.name ?? "")
                  })
+            self.companies = companies //set ur ouside array equal to this functions comapies
+            self.tableView.reloadData() //reload the data on the table cuz we just fetched new data
+            
             }catch let fetchErr {
                  print("Failed to fetch companies:", fetchErr)
             }
