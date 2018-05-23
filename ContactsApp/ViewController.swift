@@ -21,17 +21,9 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
 
     
     private func fetchCompanies(){
-        let persistantcontainer = NSPersistentContainer(name: "IntermediateTraningModels")
-        
-        //load persistant stores
-        persistantcontainer.loadPersistentStores { (storeDescription, err) in
-            if let err = err{
-                fatalError("Loding of store failer: \(err)")
-            }
-        }
         
         //create comapny object
-        let context = persistantcontainer.viewContext //need context to declare a comany
+        let context = CoreDataManager.shared.persistantContainer.viewContext //need context to declare a comany
         
         ///make te fecth request
         let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
