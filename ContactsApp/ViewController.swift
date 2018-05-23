@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UITableViewController, CreateCompanyControllerDelegate {
 
@@ -16,13 +17,45 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
         tableView.insertRows(at: [newIndexPath], with: .automatic)
         
     }
-    var companies = [
-        Company(name: "SpaceX", founded: Date()),
-        Company(name: "Tesla", founded: Date())
-    ]
+    var companies = [Company]()
+//    var companies = [
+//        Company(name: "SpaceX", founded: Date()),
+//        Company(name: "Tesla", founded: Date())
+//    ]'
+    
+    private func fetchCompanies(){
+        let persistantcontainer = NSPersistentContainer(name: "IntermediateTraningModels")
+        
+        //load persistant stores
+        persistantcontainer.loadPersistentStores { (storeDescription, err) in
+            if let err = err{
+                fatalError("Loding of store failer: \(err)")
+            }
+        }
+        
+        //create comapny object
+        let context = persistantcontainer.viewContext //need context to declare a comany
+        
+        ///make te fecth request
+        let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
+        
+        do {
+            let companies = try context.fetch(fetchRequest)
+            
+            companies.forEach({ (company) in
+                print(company.name ?? "")
+                 })
+            }catch let fetchErr {
+                 print("Failed to fetch companies:", fetchErr)
+            }
+        
+        }
+    
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        fetchCompanies()
         view.backgroundColor = .white
         navigationItem.title = "Companies"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "addIcon 2").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddContact))

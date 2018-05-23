@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol CreateCompanyControllerDelegate {
     func didAddComany(company: Company)
@@ -44,14 +45,30 @@ class CreateCompanyController: UIViewController{
     }
     
     @objc private func handleSave(){
-        dismiss(animated: true, completion: {
-            // unwrap the text field
-            guard let name = self.nameTextField.text else {return}
-            let company = Company(name: name, founded: Date())
-            self.delegate?.didAddComany(company: company) //dont get this
-            
-            
-        })
+
+        //create a persistant containter
+        let persistantcontainer = NSPersistentContainer(name: "IntermediateTraningModels")
+        
+        //load persistant stores
+        persistantcontainer.loadPersistentStores { (storeDescription, err) in
+            if let err = err{
+                fatalError("Loding of store failer: \(err)")
+            }
+        }
+        
+        //create comapny object
+        let context = persistantcontainer.viewContext //need context to declare a comany
+        //create our object
+        let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
+        //set the value of the comany
+        company.setValue(nameTextField.text, forKey: "name")
+        //then actually save the object
+        do{
+            try context.save()
+        }catch let saveErr{
+            print("Failed to save caompany:", saveErr)
+        }
+        
     }
 
     @objc func handelCancel() {

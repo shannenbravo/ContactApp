@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D53BD61020B5A51300BF3435 /* IntermediateTraningModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D53BD60E20B5A51300BF3435 /* IntermediateTraningModels.xcdatamodeld */; };
 		D5AED91320B33BEB000131B6 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AED91220B33BEB000131B6 /* UIColor+theme.swift */; };
 		D5AED91520B3684A000131B6 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AED91420B3684A000131B6 /* Company.swift */; };
 		D5AED91720B36CD8000131B6 /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AED91620B36CD8000131B6 /* CreateCompanyController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D53BD60F20B5A51300BF3435 /* IntermediateTraningModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IntermediateTraningModels.xcdatamodel; sourceTree = "<group>"; };
 		D5AED91220B33BEB000131B6 /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		D5AED91420B3684A000131B6 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		D5AED91620B36CD8000131B6 /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			children = (
 				D5EDFFD220AF861500FC22EA /* ViewController.swift */,
 				D5EDFFD020AF861500FC22EA /* AppDelegate.swift */,
+				D53BD60E20B5A51300BF3435 /* IntermediateTraningModels.xcdatamodeld */,
 				D5AED91420B3684A000131B6 /* Company.swift */,
 				D5AED91620B36CD8000131B6 /* CreateCompanyController.swift */,
 				D5AED91220B33BEB000131B6 /* UIColor+theme.swift */,
@@ -144,6 +147,7 @@
 				D5EDFFD320AF861500FC22EA /* ViewController.swift in Sources */,
 				D5AED91720B36CD8000131B6 /* CreateCompanyController.swift in Sources */,
 				D5EDFFD120AF861500FC22EA /* AppDelegate.swift in Sources */,
+				D53BD61020B5A51300BF3435 /* IntermediateTraningModels.xcdatamodeld in Sources */,
 				D5AED91520B3684A000131B6 /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,6 +336,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D53BD60E20B5A51300BF3435 /* IntermediateTraningModels.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D53BD60F20B5A51300BF3435 /* IntermediateTraningModels.xcdatamodel */,
+			);
+			currentVersion = D53BD60F20B5A51300BF3435 /* IntermediateTraningModels.xcdatamodel */;
+			path = IntermediateTraningModels.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D5EDFFC520AF861500FC22EA /* Project object */;
 }
