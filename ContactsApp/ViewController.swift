@@ -43,6 +43,28 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
         
         }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            let comany = self.companies[indexPath.row]
+            self.companies.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            let context = CoreDataManager.shared.persistantContainer.viewContext
+            context.delete(comany)
+            do{
+                try context.save()
+            }catch let saveErr{
+                print("Issue saving: ", saveErr)
+            }
+        }
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexpath) in
+            print("Editing comapny")
+        }
+        
+        
+        return [deleteAction, editAction]
+    }
+    
 
     override func viewDidLoad() {
         
