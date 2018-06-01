@@ -10,6 +10,12 @@ import UIKit
 import CoreData
 
 class ViewController: UITableViewController, CreateCompanyControllerDelegate {
+    func didEditComany(company: Company) {
+        let row = companies.index(of: company)
+        let reloadPath = IndexPath(row: row!, section: 0)
+        tableView.reloadRows(at: [reloadPath], with: .middle)
+    }
+    
 
     func didAddComany(company: Company) {
         companies.append(company)
@@ -56,14 +62,24 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
                 print("Issue saving: ", saveErr)
             }
         }
-        
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexpath) in
-            print("Editing comapny")
-        }
-        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editHandlerFunction)
+//        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexpath) in
+//            print("Editing comapny")
+//        }
+//
         
         return [deleteAction, editAction]
     }
+    
+    private func editHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath){
+        let editComanyController = CreateCompanyController()
+        editComanyController.delegate = self
+        editComanyController.company = companies[indexPath.row]
+        let navController = costumNavigateBar(rootViewController: editComanyController)
+        present(navController, animated: true, completion: nil)
+    }
+    
+    
     
 
     override func viewDidLoad() {

@@ -11,11 +11,17 @@ import CoreData
 
 protocol CreateCompanyControllerDelegate {
     func didAddComany(company: Company)
+    func didEditComany(company: Company)
 }
 
 
-
 class CreateCompanyController: UIViewController{
+    
+    var company: Company?{
+        didSet{
+            nameTextField.text = company?.name
+        }
+    }
     
     var delegate: CreateCompanyControllerDelegate?
 
@@ -33,6 +39,11 @@ class CreateCompanyController: UIViewController{
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = company == nil ? "Create Company" : "Edit Compnay"
+    }
 
     override func viewDidLoad() {
        super.viewDidLoad()
@@ -45,7 +56,31 @@ class CreateCompanyController: UIViewController{
     }
     
     @objc private func handleSave(){
-
+        
+        if company == nil{
+            saveNewContact()
+        }else{
+            saveEditCompany()
+        }
+        
+    }
+    
+    func saveEditCompany(){
+        let context = CoreDataManager.shared.persistantContainer.viewContext
+        company?.name = nameTextField.text
+        do{
+            try context.save()
+            dismiss(animated: true, completion: {
+                self.delegate?.didAddComany(company: self.company!)
+            })
+//            dismiss(animated: true, completion: nil)
+            
+        }catch let saveErr{
+            print("Error Updating Company: \(saveErr)")
+        }
+    }
+    
+    func saveNewContact(){
         //create comapny object from shared singlton
         let context = CoreDataManager.shared.persistantContainer.viewContext //need context to declare a comany
         //create our object
@@ -59,7 +94,7 @@ class CreateCompanyController: UIViewController{
             //this block if for sucess so if the data is saved correctly
             dismiss(animated: true, completion: {
                 self.delegate?.didAddComany(company: company as! Company)
-                })
+            })
         }catch let saveErr{
             print("Failed to save caompany:", saveErr)
         }
