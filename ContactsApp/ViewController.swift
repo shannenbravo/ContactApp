@@ -63,10 +63,7 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
             }
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editHandlerFunction)
-//        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexpath) in
-//            print("Editing comapny")
-//        }
-//
+
         
         return [deleteAction, editAction]
     }
@@ -107,8 +104,18 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
         cell.backgroundColor = .pastelGrey
-        let company = companies[indexPath.row].name
-        cell.textLabel?.text = company
+        let company = companies[indexPath.row]
+        if let name = company.name, let founded = company.founded {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            let foundedDateString = dateFormatter.string(from: founded)
+            let dateSrting = "\(name) - Founded: \(foundedDateString)"
+            cell.textLabel?.text = dateSrting
+            
+        }else {
+            cell.textLabel?.text = company.name
+        }
+//        cell.textLabel?.text = company
         cell.textLabel?.textColor = .black
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         return cell
