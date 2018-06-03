@@ -36,6 +36,7 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
         iv.isUserInteractionEnabled = true
         iv.layer.cornerRadius = iv.frame.width / 2
         iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFill
         iv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
         return iv
     }()
@@ -169,7 +170,7 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
         companyPic.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         companyPic.widthAnchor.constraint(equalToConstant: 100).isActive = true
         companyPic.layer.borderColor = UIColor.white.cgColor
-        companyPic.layer.borderWidth = 2 
+        companyPic.layer.borderWidth = 2
        
         view.addSubview(nameLabel)
 //        nameLabel.topAnchor.constraint(equalTo: companyPic.bottomAnchor).isActive = true

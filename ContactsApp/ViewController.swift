@@ -86,9 +86,30 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
         view.backgroundColor = .white
         navigationItem.title = "Companies"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "addIcon 2").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddContact))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
         tableView.backgroundColor = .white
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
         tableView.tableFooterView = UIView();
+    }
+    
+    @objc func handleReset(){
+        let context = CoreDataManager.shared.persistantContainer.viewContext
+        //make batch delete request
+        let deleteBatchRequest = NSBatchDeleteRequest(fetchRequest: Company.fetchRequest())
+        do{
+            try context.execute(deleteBatchRequest)
+            
+            var indexPathToRemove = [IndexPath]()
+            for(index, _) in companies.enumerated(){
+                let indexPath = IndexPath(row: index, section: 0)
+                indexPathToRemove.append(indexPath)
+            }
+            companies.removeAll()
+            tableView.deleteRows(at: indexPathToRemove, with: .left)
+        
+        }catch let delErr{
+            print("Cannnot reset", delErr)
+        }
     }
 
 
@@ -100,7 +121,18 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
         present(navController, animated: true, completion: nil)
 
     }
-
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "No Companies Found"
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return companies.count == 0 ? 150 : 0
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
         cell.backgroundColor = .pastelGrey
