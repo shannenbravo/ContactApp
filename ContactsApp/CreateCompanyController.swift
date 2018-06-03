@@ -26,10 +26,17 @@ class CreateCompanyController: UIViewController{
     }
     
     var delegate: CreateCompanyControllerDelegate?
-
+    
+    lazy var companyPic: UIImageView = {
+        let iv = UIImageView(image: #imageLiteral(resourceName: "select_photo_empty"))
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.isUserInteractionEnabled = true
+        iv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
+        return iv
+    }()
+    
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .red
         label.text = "Name"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label;
@@ -62,6 +69,11 @@ class CreateCompanyController: UIViewController{
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
          view.backgroundColor = .white
 
+    }
+    
+    @objc private func handleSelectPhoto(){
+        let imagePickerController = UIImagePickerController()
+        present(imagePickerController, animated: true, completion: nil)
     }
     
     @objc private func handleSave(){
@@ -124,10 +136,18 @@ class CreateCompanyController: UIViewController{
         lightPinkBacgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         lightPinkBacgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         lightPinkBacgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        lightPinkBacgroundView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        lightPinkBacgroundView.heightAnchor.constraint(equalToConstant: 450).isActive = true
 
+        view.addSubview(companyPic)
+//        companyPic.topAnchor.constraint(equalTo: lightPinkBacgroundView.topAnchor).isActive = true
+        companyPic.topAnchor.constraint(equalTo: view.topAnchor, constant: 18).isActive = true
+        companyPic.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        companyPic.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        companyPic.heightAnchor.constraint(equalToConstant: 100).isActive = true
+       
         view.addSubview(nameLabel)
-        nameLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        nameLabel.topAnchor.constraint(equalTo: companyPic.bottomAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: companyPic.bottomAnchor, constant: 18).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
