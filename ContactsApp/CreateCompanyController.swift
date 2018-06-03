@@ -15,7 +15,7 @@ protocol CreateCompanyControllerDelegate {
 }
 
 
-class CreateCompanyController: UIViewController{
+class CreateCompanyController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var company: Company?{
         didSet{
@@ -73,7 +73,22 @@ class CreateCompanyController: UIViewController{
     
     @objc private func handleSelectPhoto(){
         let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
         present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let editiedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
+            companyPic.image = editiedImage
+        }else if let orginalImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            companyPic.image = orginalImage
+        }
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func handleSave(){
