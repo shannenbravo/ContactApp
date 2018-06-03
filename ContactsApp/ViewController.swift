@@ -115,7 +115,11 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
         }else {
             cell.textLabel?.text = company.name
         }
-//        cell.textLabel?.text = company
+        cell.imageView?.image = #imageLiteral(resourceName: "select_photo_empty")
+        //if there is am image is set for that comany 
+        if let imageData = company.imageData{
+            cell.imageView?.image = UIImage(data: imageData)
+        }
         cell.textLabel?.textColor = .black
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         return cell

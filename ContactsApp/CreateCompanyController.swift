@@ -22,6 +22,9 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
             nameTextField.text = company?.name
             guard let founded = company?.founded else {return}
             datePicker.date = founded
+            if let imageData = company?.imageData{
+                companyPic.image = UIImage(data: imageData)
+            }
         }
     }
     
@@ -31,6 +34,8 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
         let iv = UIImageView(image: #imageLiteral(resourceName: "select_photo_empty"))
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.isUserInteractionEnabled = true
+        iv.layer.cornerRadius = iv.frame.width / 2
+        iv.clipsToBounds = true
         iv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
         return iv
     }()
@@ -124,6 +129,10 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
         //set the value of the comany
         company.setValue(nameTextField.text, forKey: "name")
         company.setValue(datePicker.date, forKey: "founded")
+        if let contactImage = companyPic.image{
+            let image = UIImageJPEGRepresentation(contactImage, 0.8)
+            company.setValue(image, forKey: "imageData")
+        }
         //then actually save the object
         do{
             try context.save()
@@ -158,7 +167,9 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
         companyPic.topAnchor.constraint(equalTo: view.topAnchor, constant: 18).isActive = true
         companyPic.heightAnchor.constraint(equalToConstant: 100).isActive = true
         companyPic.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        companyPic.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        companyPic.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        companyPic.layer.borderColor = UIColor.white.cgColor
+        companyPic.layer.borderWidth = 2 
        
         view.addSubview(nameLabel)
 //        nameLabel.topAnchor.constraint(equalTo: companyPic.bottomAnchor).isActive = true
