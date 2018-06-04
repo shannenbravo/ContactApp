@@ -88,7 +88,7 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "addIcon 2").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddContact))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
         tableView.backgroundColor = .white
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        tableView.register(CompanyCell.self, forCellReuseIdentifier: "cellId")
         tableView.tableFooterView = UIView();
     }
     
@@ -133,27 +133,23 @@ class ViewController: UITableViewController, CreateCompanyControllerDelegate {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return companies.count == 0 ? 150 : 0
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .pastelGrey
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! CompanyCell
+//        cell.backgroundColor = .pastelGrey
         let company = companies[indexPath.row]
-        if let name = company.name, let founded = company.founded {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM dd, yyyy"
-            let foundedDateString = dateFormatter.string(from: founded)
-            let dateSrting = "\(name) - Founded: \(foundedDateString)"
-            cell.textLabel?.text = dateSrting
-            
-        }else {
-            cell.textLabel?.text = company.name
-        }
-        cell.imageView?.image = #imageLiteral(resourceName: "select_photo_empty")
-        //if there is am image is set for that comany 
-        if let imageData = company.imageData{
-            cell.imageView?.image = UIImage(data: imageData)
-        }
-        cell.textLabel?.textColor = .black
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        cell.company = company
+//        cell.imageView?.image = #imageLiteral(resourceName: "select_photo_empty")
+//        //if there is am image is set for that comany 
+//        if let imageData = company.imageData{
+//            cell.imageView?.image = UIImage(data: imageData)
+//        }
+//        cell.textLabel?.textColor = .black
+//        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         return cell
     }
 
