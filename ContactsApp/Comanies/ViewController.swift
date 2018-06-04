@@ -43,11 +43,11 @@ class ViewController: UITableViewController {
         fetchCompanies()
         view.backgroundColor = .white
         navigationItem.title = "Companies"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "addIcon 2").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddContact))
+        setupPlusInNavBar(selector:  #selector(handleAddContact))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
         tableView.backgroundColor = .white
         tableView.register(CompanyCell.self, forCellReuseIdentifier: "cellId")
-        tableView.tableFooterView = UIView();
+        tableView.tableFooterView = UIView()
     }
     
     @objc func handleReset(){

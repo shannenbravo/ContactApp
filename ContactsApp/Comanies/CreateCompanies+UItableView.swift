@@ -29,6 +29,13 @@ extension ViewController {
         return [deleteAction, editAction]
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let employeeController = EmployeesController()
+        let company = companies[indexPath.row]
+        employeeController.company = company
+        navigationController?.pushViewController(employeeController, animated: true)
+    }
+    
     private func editHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath){
         let editComanyController = CreateCompanyController()
         editComanyController.delegate = self
