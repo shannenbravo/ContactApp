@@ -22,19 +22,15 @@ struct CoreDataManager {
         return container
     }()
     
-    func saveEmployee(name: String) -> (Employee?, Error?) {
+    func saveEmployee(name: String, company: Company) -> (Employee?, Error?) {
         let context = persistantContainer.viewContext
         let employee = NSEntityDescription.insertNewObject(forEntityName: "Employee", into: context) as! Employee
         employee.setValue(name, forKey: "name")
         
-//        let employeeInfo = NSEntityDescription.insertNewObject(forEntityName: "EmployeeInformation", into: context) as! EmployeeInformation
-//        employeeInfo.taxId = "456"
-//        employee.employeeInformation = employeeInfo
+        employee.company = company
         let employeeInformation = NSEntityDescription.insertNewObject(forEntityName: "EmployeeInformation", into: context) as! EmployeeInformation
         
         employeeInformation.taxId = "456"
-        
-        //        employeeInformation.setValue("456", forKey: "taxId")
         
         employee.employeeInformation = employeeInformation
         
