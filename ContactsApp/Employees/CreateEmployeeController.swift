@@ -8,21 +8,28 @@
 
 import UIKit
 
-let nameLabel: UILabel = {
-    let label = UILabel()
-    label.text = "Name"
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label;
-}()
-
-let nameTextField: UITextField = {
-    let tf = UITextField()
-    tf.placeholder = "Enter Name"
-    tf.translatesAutoresizingMaskIntoConstraints = false
-    return tf
-}()
+protocol CreateEmployeeControllerDelegate {
+    func didAddEmployee(employee: Employee)
+}
 
 class CreateEmployeeController: UIViewController {
+    
+    var delegate: CreateEmployeeControllerDelegate?
+    
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Name"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label;
+    }()
+    
+    let nameTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Enter Name"
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        return tf
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -35,11 +42,15 @@ class CreateEmployeeController: UIViewController {
     
     @objc func handleSave(){
         guard let emplyeeName = nameTextField.text else {return}
-        let err = CoreDataManager.shared.saveEmployee(name: emplyeeName)
-        if let err = err{
+        let tuple = CoreDataManager.shared.saveEmployee(name: emplyeeName)
+        if let err = tuple.1{
             print(err)
         }else{
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: {
+                // we'll call the delegate somehow
+                self.delegate?.didAddEmployee(employee: tuple.0!)
+            })
+//            dismiss(animated: true, completion: nil)
         }
         
     }

@@ -55,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D571470C20C62C4400EB7238 /* Employees */ = {
+			isa = PBXGroup;
+			children = (
+				D57D44E420C5BF8400AFC59B /* CreateEmployeeController.swift */,
+				D57D44DE20C5B6A700AFC59B /* EmployeesController.swift */,
+			);
+			path = Employees;
+			sourceTree = "<group>";
+		};
 		D57D44E020C5BB7400AFC59B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,8 +77,6 @@
 			children = (
 				D5EDFFD220AF861500FC22EA /* ViewController.swift */,
 				D57D44D820C5935900AFC59B /* CompanyCell.swift */,
-				D57D44DE20C5B6A700AFC59B /* EmployeesController.swift */,
-				D57D44E420C5BF8400AFC59B /* CreateEmployeeController.swift */,
 				D5AED91620B36CD8000131B6 /* CreateCompanyController.swift */,
 				D57D44DA20C5A2D800AFC59B /* ComapniesControllers+CreateComany.swift */,
 				D57D44DC20C5A3F900AFC59B /* CreateCompanies+UItableView.swift */,
@@ -96,6 +103,7 @@
 		D5EDFFCF20AF861500FC22EA /* ContactsApp */ = {
 			isa = PBXGroup;
 			children = (
+				D571470C20C62C4400EB7238 /* Employees */,
 				D57D44E020C5BB7400AFC59B /* Helpers */,
 				D57D44E120C5BB8C00AFC59B /* Comanies */,
 				D5AED91420B3684A000131B6 /* Company.swift */,
