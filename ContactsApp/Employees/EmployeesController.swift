@@ -36,8 +36,12 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath)
         let employee = employees[indexPath.row]
-        cell.backgroundColor = .red
+        cell.backgroundColor = UIColor.pastelYellow
         cell.textLabel?.text = employee.name
+        if let taxId = employee.employeeInformation?.taxId {
+            cell.textLabel?.text = "\(employee.name ?? "")    \(taxId)"
+        }
+//        cell.textLabel?.text = employee.name
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         return cell
     }
