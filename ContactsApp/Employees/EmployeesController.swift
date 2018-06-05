@@ -38,9 +38,16 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
         let employee = employees[indexPath.row]
         cell.backgroundColor = UIColor.pastelYellow
         cell.textLabel?.text = employee.name
-        if let taxId = employee.employeeInformation?.taxId {
-            cell.textLabel?.text = "\(employee.name ?? "")    \(taxId)"
+        if let birthday = employee.employeeInformation?.birthdate {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            
+            cell.textLabel?.text = "\(employee.name ?? "")    \(dateFormatter.string(from: birthday))"
+            
         }
+//        if let taxId = employee.employeeInformation?.taxId {
+//            cell.textLabel?.text = "\(employee.name ?? "")    \(taxId)"
+//        }
 //        cell.textLabel?.text = employee.name
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         return cell
@@ -53,15 +60,6 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
     func fetchData(){
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else {return}
         self.employees = companyEmployees
-//        let context = CoreDataManager.shared.persistantContainer.viewContext
-//        let request = NSFetchRequest<Employee>(entityName: "Employee")
-//
-//        do{
-//            let employees = try context.fetch(request)
-//            self.employees = employees
-//        }catch let err{
-//            print("problem fetching employees:", err)
-//        }
         
     }
     
