@@ -21,6 +21,11 @@ class EmployeesController: UITableViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupPlusInNavBar(selector: #selector(handleAdd))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
+    }
+    
+    @objc func handleSave(){
+        
     }
     
     @objc private func handleAdd(){

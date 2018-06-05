@@ -20,5 +20,19 @@ extension UIViewController {
     @objc func handleCancelModal(){
         dismiss(animated: true, completion: nil)
     }
+    
+    func setupLightPinkBackground(height: CGFloat) -> UIView {
+        
+        let lightPinkBacgroundView = UIView()
+        lightPinkBacgroundView.backgroundColor = .pastelGrey
+        lightPinkBacgroundView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(lightPinkBacgroundView)
+        lightPinkBacgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        lightPinkBacgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        lightPinkBacgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        lightPinkBacgroundView.heightAnchor.constraint(equalToConstant: height).isActive = true
+        
+        return lightPinkBacgroundView
+    }
 
 }

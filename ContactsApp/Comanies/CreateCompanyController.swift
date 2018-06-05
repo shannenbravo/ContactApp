@@ -110,6 +110,10 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
     func saveEditCompany(){
         let context = CoreDataManager.shared.persistantContainer.viewContext
         company?.name = nameTextField.text
+        if let contactImage = companyPic.image{
+            let image = UIImageJPEGRepresentation(contactImage, 0.8)
+            company?.imageData = image
+        }
         do{
             try context.save()
             dismiss(animated: true, completion: {
@@ -119,6 +123,7 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
             
         }catch let saveErr{
             print("Error Updating Company: \(saveErr)")
+            
         }
     }
     
@@ -154,15 +159,7 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
     }
 
     private func setupUI() {
-        let lightPinkBacgroundView = UIView()
-        lightPinkBacgroundView.backgroundColor = .pastelGrey
-        lightPinkBacgroundView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(lightPinkBacgroundView)
-        lightPinkBacgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        lightPinkBacgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        lightPinkBacgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        lightPinkBacgroundView.heightAnchor.constraint(equalToConstant: 450).isActive = true
-
+        let lightPinkBacgroundView = setupLightPinkBackground(height: 450)
         view.addSubview(companyPic)
 //        companyPic.topAnchor.constraint(equalTo: lightPinkBacgroundView.topAnchor).isActive = true
         companyPic.topAnchor.constraint(equalTo: view.topAnchor, constant: 18).isActive = true
@@ -173,7 +170,6 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
         companyPic.layer.borderWidth = 2
        
         view.addSubview(nameLabel)
-//        nameLabel.topAnchor.constraint(equalTo: companyPic.bottomAnchor).isActive = true
         nameLabel.topAnchor.constraint(equalTo: companyPic.bottomAnchor, constant: 18).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
