@@ -119,8 +119,7 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
             dismiss(animated: true, completion: {
                 self.delegate?.didEditComany(company: self.company!)
             })
-//            dismiss(animated: true, completion: nil)
-            
+
         }catch let saveErr{
             print("Error Updating Company: \(saveErr)")
             
@@ -161,7 +160,7 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
     private func setupUI() {
         let lightPinkBacgroundView = setupLightPinkBackground(height: 450)
         view.addSubview(companyPic)
-//        companyPic.topAnchor.constraint(equalTo: lightPinkBacgroundView.topAnchor).isActive = true
+        
         companyPic.topAnchor.constraint(equalTo: view.topAnchor, constant: 18).isActive = true
         companyPic.heightAnchor.constraint(equalToConstant: 100).isActive = true
         companyPic.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
